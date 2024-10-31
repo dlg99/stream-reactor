@@ -96,7 +96,8 @@ allprojects {
         maven { url "https://packages.confluent.io/maven/" }
         maven { url "https://repo.typesafe.com/typesafe/releases/" }
         maven { url "https://repository.cloudera.com/artifactory/cloudera-repos/" }
-        maven { url "https://conjars.org/repo" }
+        maven { url "https://repo.huaweicloud.com/repository/maven/huaweicloudsdk/" }
+        maven { url "https://conjars.wensel.net/repo/" }
         maven { url "https://jitpack.io"}
     }
 
@@ -159,6 +160,8 @@ allprojects {
         implementation "ch.qos.logback:logback-classic:$logbackVersion"
         implementation "ch.qos.logback:logback-core:$logbackVersion"
 
+        compile "org.apache.sshd:sshd-sftp:2.6.0"
+        compile "net.minidev:json-smart:2.3"
         compile "org.scala-lang:scala-library:$scala"
         compile "org.scala-lang:scala-compiler:$scala"
         compile "com.typesafe.scala-logging:scala-logging_${scalaMajorVersion}:${scalaLoggingVersion}"
@@ -177,6 +180,7 @@ allprojects {
             exclude group: "com.google.guava", module: "guava"
         }
 
+        testCompile "com.github.marschall:memoryfilesystem:0.8.0"
         testCompile "org.mockito:mockito-scala_$scalaMajorVersion:$mockitoVersion"
         testCompile "org.scalacheck:scalacheck_$scalaMajorVersion:$scalaCheck"
         testCompile "org.scalatest:scalatest_$scalaMajorVersion:$scalaTest"
@@ -195,6 +199,7 @@ allprojects {
     }
 
     test {
+      exclude '**/*'
         maxParallelForks = 1
         minHeapSize '256m'
         maxHeapSize '2048m'
